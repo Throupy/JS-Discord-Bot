@@ -1,0 +1,15 @@
+{
+  "name": "discord_bot",
+  "version": "1.0.0",
+  "description": "a discord bot made in javascript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "owen",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^11.3.2",
+    "xmlhttprequest": "^1.8.0"
+  }
+}
