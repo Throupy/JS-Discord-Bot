@@ -14,25 +14,27 @@ module.exports.run = async (bot, message, args) => {
     } else {
         message.channel.send("Specify a user")
     }
-    if (getRandomInt(10) == 1) {
+    if (getRandomInt(2) == 1) {
         let userCoins = coins[message.author.id].coins;
         let victimCoins = coins[argsUser.id].coins;
-        let five_perc = Math.round(victimCoins / 20);
-        coins[argsUser.id].coins = coins[argsUser.id].coins - five_perc;
-        coins[message.author.id].coins = coins[message.author.id].coins + five_perc
+        let two_perc = Math.round(victimCoins / 50);
+        coins[argsUser.id].coins = coins[argsUser.id].coins - two_perc;
+        coins[message.author.id].coins = Math.round(coins[message.author.id].coins + two_perc)
         robbedEmbed = new Discord.RichEmbed()
         .setAuthor(message.author.username)
         .setColor("#00ff00")
-        .addField(":gun:","You robbed " + argsUser.user.username + " For 5% of their coins! ("+five_perc+")")
-        .addField("Chance","1/10")
-        return message.channel.send(robbedEmbed);
+        .addField(":gun:","You robbed " + argsUser.user.username + " For 2% of their coins! ("+two_perc+")")
+        .addField("Chance","1/2")
+        message.channel.send(robbedEmbed).then(msg => {msg.delete(5000)});
     } else {
+        coinsLost = Math.round(coins[message.author.id].coins / 50)
+        coins[message.author.id].coins = coins[message.author.id].coins - coinsLost
         caughtEmbed = new Discord.RichEmbed()
         .setAuthor(message.author.username)
         .setColor("#ff0000")
-        .addField(":gun:","You were robbing " + argsUser.user.username + " and got caught by the police and you lose 2% ("+coins[message.author.id].coins / 50+") of your coins!")
-        .addField("Chance","9/10")
-        return message.channel.send(caughtEmbed);
+        .addField(":gun:","You were robbing " + argsUser.user.username + " and got caught by the police and you lose 2% ("+coinsLost+") of your coins!")
+        .addField("Chance","1/2")
+        message.channel.send(caughtEmbed).then(msg => {msg.delete(5000)});
     }
 }
 

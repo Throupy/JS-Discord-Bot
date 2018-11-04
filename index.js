@@ -24,8 +24,8 @@ bot.on("ready", async () => {
     console.log(`${bot.user.username} is online!`); //Give a console message saying the bot in online
     bot.user.setPresence({
         game: {
-            name:"Some gay shit",
-            type:"Watching"
+            name:"Bot Making",
+            type:"Playing"
         },
         status:"online"
     });
