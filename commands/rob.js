@@ -5,6 +5,13 @@ module.exports.run = async (bot, message, args) => {
         return Math.floor(Math.random() * Math.floor(max));
     }
     let argsUser = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
+    if(message.author.id == argsUser.id) {
+        robSelfEmbed = new Discord.RichEmbed()
+        .setAuthor(message.author.username)
+        .setColor("ff0000")
+        .addField(`:x:You can't rob yourself!`,":x:You idiot...")
+        return message.channel.send(robSelfEmbed)
+    }
     if (argsUser) {
         if(!coins[argsUser.id]){
             coins[argsUser.id] = {

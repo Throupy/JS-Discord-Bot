@@ -8,7 +8,14 @@ module.exports.run = async (bot, message, args) => {
     function getRandomInt(max) {
         return Math.floor(Math.random() * Math.floor(max));
     }
-    let amount = message.content.split(" ")[1];
+    let amount = args[0];
+    if (isNaN(parseInt(amount,10))) {
+        NaNEmbed = new Discord.RichEmbed()
+        .setAuthor(message.author.username)
+        .setColor("ff0000")
+        .addField(`:x: '${amount}' is not an integer!`,":x:You idiot...")
+        return message.channel.send(NaNEmbed)
+    }
     let diceResult = getRandomInt(5) + 1
     if (diceResult % 2 == 0) {
         if (coins[message.author.id].coins >= amount) {
